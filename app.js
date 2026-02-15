@@ -6,11 +6,12 @@ const PORT = 3000;
 
 app.get('/', async (req, res) => {
   try {
-    const [cpu, mem, disk, info] = await Promise.all([
+    const [cpu, mem, disk, info, load] = await Promise.all([
       si.cpu(),
       si.mem(),
       si.fsSize(),
-      si.osInfo()
+      si.osInfo(),
+      si.currentLoad()
     ]);
 
     const stats = `<!DOCTYPE html>
@@ -30,7 +31,7 @@ OS: ${info.distro} ${info.release}
 Uptime: ${Math.floor(si.time().current - info.bootTime)}s
 
 CPU: ${cpu.manufacturer} ${cpu.brand}
-Usage: ${await si.currentLoad()}%
+Usage: ${load.currentLoad.toFixed(1)}%
 
 Memory:
   Total: ${(mem.total / 1e9).toFixed(1)}GB
@@ -52,3 +53,5 @@ Disk ${disk[0].fs} (${disk[0].type}): ${disk[0].use}% used
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);
 });
+
+module.exports = app;
