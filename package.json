@@ -1,0 +1,38 @@
+{
+  "name": "pi-status",
+  "version": "1.0.0",
+  "description": "A simple Node.js Express application that displays live system statistics for a Raspberry Pi.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "mocha test.js",
+    "lint": "eslint .",
+    "build": "docker build -t pi-status .",
+    "run": "docker run -d -p 3000:3000 pi-status"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/neon-monk-888/pi-status"
+  },
+  "keywords": [
+    "raspberry-pi",
+    "system-status",
+    "express",
+    "docker"
+  ],
+  "author": "neon-monk-888",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/neon-monk-888/pi-status/issues"
+  },
+  "homepage": "https://github.com/neon-monk-888/pi-status#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "systeminformation": "^5.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.3.2"
+  }
+}
